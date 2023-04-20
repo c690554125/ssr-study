@@ -1,25 +1,25 @@
-export default {
+module.exports = {
 	module: {
 		rules: [
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: {
-					options: {
+				use: [
+					{
 						loader: 'babel-loader',
-						preset: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										browsers: [ 'last 2 versions' ]
+						options: {
+							presets: [
+								[
+									'@babel/preset-react',
+									{
+										runtime: 'automatic'
 									}
-								}
+								],
+								'@babel/preset-env'
 							]
-						]
+						}
 					}
-				}
+				]
 			}
 		]
 	}

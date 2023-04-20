@@ -1,18 +1,15 @@
-import { merge } from 'webpack-merge';
-import nodeExternals from 'webpack-node-externals';
-import commonConfig from './webpack.common.js';
-import { resolvePath } from './helper.js';
+const { merge } = require('webpack-merge');
+const nodeExternals = require('webpack-node-externals');
+const commonConfig = require('./webpack.common');
+const path = require('path');
 
-const config = merge(commonConfig, {
-	target: 'node',
+module.exports = merge(commonConfig, {
 	mode: 'development',
-	entry: resolvePath('../server/index.js'),
+	entry: path.resolve(__dirname, '../server/index'),
 	externalsPresets: { node: true },
 	externals: [ nodeExternals() ],
 	output: {
-		filename: 'bundle.js',
-		path: resolvePath('../build')
+		filename: 'bundle.server.js',
+		path: path.resolve(__dirname, '../build')
 	}
 });
-
-export default config;
