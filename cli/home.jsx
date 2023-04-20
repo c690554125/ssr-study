@@ -1,9 +1,11 @@
-import react from 'react';
-
 const Home = () => {
 	return (
-		<div>
-			<div>This is sanyuan</div>
+		<div
+			onClick={() => {
+				console.log('home print');
+			}}
+		>
+			This is sanyuan with click event
 		</div>
 	);
 };

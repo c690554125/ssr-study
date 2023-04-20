@@ -1,8 +1,11 @@
 import Koa from 'koa';
 import { renderToString } from 'react-dom/server';
+import KoaStatic from 'koa-static';
 import Home from '../cli/home.jsx';
 
 const app = new Koa();
+
+app.use(KoaStatic('.'));
 
 const content = renderToString(<Home />);
 
@@ -16,6 +19,7 @@ app.use(async (ctx) => {
       </head>
       <body>
         <div id="root">${content}</div>
+        <script src="/build/bundle.client.js"></script>
       </body>
     </html>
   `;
