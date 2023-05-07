@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server:test:build": "webpack --config ./config/webpack.server.js --watch",
     "server:test:run": "nodemon ./build/bundle.server.js",
-    "client:test:run": "webpack --config ./config/webpack.client.js --watch"
+    "client:test:build": "webpack --config ./config/webpack.client.js --watch",
+    "start": "npm run server:test:build & npm run server:test:run & npm run client:test:build"
   },
   "author": "",
   "license": "ISC",
@@ -24,9 +25,14 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "@koa/router": "^12.0.0",
     "koa": "^2.14.2",
     "koa-static": "^5.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.10.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2"
   }
 }

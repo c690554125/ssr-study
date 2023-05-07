@@ -1,30 +1,24 @@
 import Koa from 'koa';
-import { renderToString } from 'react-dom/server';
 import KoaStatic from 'koa-static';
-import Home from '../cli/home.jsx';
+import KoaRouter from '@koa/router';
+import routesMap from '@/cli/routes';
+import { getStore } from '@/cli/store';
+import handleDataFetch from './handleDataFetch';
+import { render } from './utils';
 
 const app = new Koa();
 
-app.use(KoaStatic('.'));
-
-const content = renderToString(<Home />);
-
-app.use(async (ctx) => {
-	ctx.response.set('Content-Type', 'text/html');
-	// 设置响应体
-	ctx.body = `
-    <html>
-      <head>
-        <title>ssr</title>
-      </head>
-      <body>
-        <div id="root">${content}</div>
-        <script src="/build/bundle.client.js"></script>
-      </body>
-    </html>
-  `;
+const router = new KoaRouter();
+router.get(/.*/, async (ctx) => {
+	const store = getStore();
+	await handleDataFetch(routesMap, ctx.request, store);
+	const html = render(ctx, store, routesMap);
+	ctx.body = html;
 });
 
+app.use(KoaStatic('.'));
+app.use(router.routes()).use(router.allowedMethods());
+
 app.listen(1234, () => {
-	console.log('Koa app listening on port 3000');
+	console.log('Koa app listening on port 1234');
 });
