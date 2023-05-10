@@ -1,4 +1,5 @@
 import Home from './Home';
+import Layout from './Layout';
 import Login from './login';
 
 // export default (
@@ -11,16 +12,22 @@ import Login from './login';
 const routesMap = [
 	{
 		path: '/',
-		element: <Home />,
-		exact: true,
-		loadData: Home.loadData, //服务端获取异步数据的函数
-		key: 'home'
-	},
-	{
-		path: '/login',
-		element: <Login />,
-		exact: true,
-		key: 'login'
+		element: <Layout />,
+		children: [
+			{
+				path: 'home',
+				element: <Home />,
+				exact: true,
+				loadData: Home.loadData, //服务端获取异步数据的函数
+				key: 'home'
+			},
+			{
+				path: 'login',
+				element: <Login />,
+				exact: true,
+				key: 'login'
+			}
+		]
 	}
 ];
 

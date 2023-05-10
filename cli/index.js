@@ -3,16 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import routesMap from './routes';
 import { getClientStore } from './store';
+import renderRoute from '@/utils/renderRouteHelper';
 
 const App = () => {
+	const routesTree = renderRoute(routesMap);
+	console.log('routesTree', routesTree);
 	return (
 		<Provider store={getClientStore()}>
 			<BrowserRouter>
-				<Routes>
-					{routesMap.map((route) => {
-						return <Route {...route} />;
-					})}
-				</Routes>
+				<Routes>{routesTree[0]}</Routes>
 			</BrowserRouter>
 		</Provider>
 	);

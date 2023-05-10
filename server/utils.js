@@ -2,6 +2,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import renderRoute from '@/utils/renderRouteHelper';
 
 /**
  * 
@@ -9,14 +10,11 @@ import { Provider } from 'react-redux';
  * @returns 
  */
 export const render = (ctx, store, routes) => {
+	const routesTree = renderRoute(routes);
 	const content = renderToString(
 		<Provider store={store}>
 			<StaticRouter location={ctx.request.path}>
-				<Routes>
-					{routes.map((route) => {
-						return <Route {...route} />;
-					})}
-				</Routes>
+				<Routes>{routesTree[0]}</Routes>
 			</StaticRouter>
 		</Provider>
 	);
