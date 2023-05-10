@@ -14,7 +14,7 @@ export const render = (ctx, store, routes) => {
 	const content = renderToString(
 		<Provider store={store}>
 			<StaticRouter location={ctx.request.path}>
-				<Routes>{routesTree[0]}</Routes>
+				<Routes>{routesTree.map((RouteItem) => RouteItem)}</Routes>
 			</StaticRouter>
 		</Provider>
 	);

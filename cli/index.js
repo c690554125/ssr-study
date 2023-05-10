@@ -11,7 +11,7 @@ const App = () => {
 	return (
 		<Provider store={getClientStore()}>
 			<BrowserRouter>
-				<Routes>{routesTree[0]}</Routes>
+				<Routes>{routesTree.map((RouteItem) => RouteItem)}</Routes>
 			</BrowserRouter>
 		</Provider>
 	);

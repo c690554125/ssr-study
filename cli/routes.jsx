@@ -13,6 +13,7 @@ const routesMap = [
 	{
 		path: '/',
 		element: <Layout />,
+		key: 'layout',
 		children: [
 			{
 				path: 'home',
